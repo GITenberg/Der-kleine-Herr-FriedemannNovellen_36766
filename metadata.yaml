@@ -1,0 +1,37 @@
+_repo: Der-kleine-Herr-FriedemannNovellen_36766
+_version: 0.0.1
+covers:
+- cover_type: archival
+  image_path: 36766/36766-h/images/cover.jpg
+  rights: Public domain in the USA.
+  rights_url: http://creativecommons.org/about/pdm
+creator:
+  author:
+    agent_name: Mann, Thomas
+    aliases:
+    - Mann, Paul Thomas
+    - Thomas, Paul
+    birthdate: 1875
+    deathdate: 1955
+    gutenberg_agent_id: '4200'
+    url: http://www.gutenberg.org/2009/agents/4200
+    wikipedia: http://en.wikipedia.org/wiki/Thomas_Mann
+description: ''
+gutenberg_bookshelf: DE Prosa
+gutenberg_issued: '2011-07-17'
+gutenberg_type: Text
+identifiers:
+  gutenberg: '36766'
+language: de
+publisher: Project Gutenberg
+rights: Public domain in the USA.
+rights_url: http://creativecommons.org/about/pdm
+subjects:
+- !lcsh 'Fiction'
+- !lcsh 'Short stories, German'
+- !lcc 'PT'
+- GITenberg
+tableOfContents: Der kleine Herr Friedemann -- Der Tod -- Der Wille zum Glück -- Enttäuschung
+  -- Der Bajazzo -- Tobias Mindernickel.
+title: 'Der kleine Herr Friedemann: Novellen'
+url: http://www.gutenberg.org/ebooks/36766

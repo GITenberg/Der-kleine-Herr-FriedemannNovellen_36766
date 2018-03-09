@@ -1,0 +1,54 @@
+sudo: required
+dist: trusty
+language: ruby
+
+before_install:
+- gem install asciidoctor -v 1.5.2
+- gem install tilt
+- sudo -H pip install git+https://github.com/gitenberg-dev/gitberg-build
+- sudo -H pip install git+https://github.com/gitenberg-dev/pg-epubmaker
+script:
+- VERSION=`ruby -e "require 'yaml'; meta = YAML.load_file('metadata.yaml'); puts meta['_version'];"`
+- git clone https://github.com/gitenberg-dev/asciidoctor-htmlbook.git
+- sudo -H pip install -r asciidoctor-htmlbook/gitberg-machine/requirements.txt
+
+- /usr/bin/python -c "from gitenberg import travis; travis.build_epub()"
+- ebook-convert book.epub book.mobi
+- xvfb-run ebook-convert book.epub book.pdf
+notifications:
+  webhooks:
+    urls:
+      - https://unglue.it/api/travisci/webhook
+    on_success: always
+    on_failure: never
+    on_start: never
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: Zxu8SI1O35mcyYoqYnuxCew/pXJlS6U05vpgdAZ02mERZWcOo4/6rBlWqQ+9eHNdtdAY7/1WpQhhbZ2wDPEKUByZmWcLpuORmSzwwGpncGzInDDsX3h0vta1J/Hxu8DQAXwh18W3n5UnNXXLd747/wEVdljZn20iA4R0mcdr1UEpcaB2GCoskhLmcX3p9rAYeXXm93hCfqNCHtZZawm+qXTKpG4buSzXo1+ru7zGTTXfCEF5TZJrZiCHaf9Pe7OJvkEohWWjdPMkVflZT43nudR0f7wrdlBBCvyuDWwUkAmeeO2sWMOzdE+ikcvqm4Pqc4EwoRQBqwtfbBU6XAAsbt/FUsfsWKBVHYBFj7lxNEo815wlP/xZdgTimxyP0Wza2iPWvlNDgmVwfnZtiNT8A7fiMGRqub2ZRMoa0ZWV8Tw3bAA2pabT4FAptgg0B71USVHKF+J/3vIBRcDcN7Iq6vfE1YQ2jCRo2M429gxXSkz5GdejIyX9LIB22mw1S88KsmItQDbZbZsJ0O8IDL5Qj8FqgB5weog6EXJvlkEnTCTGdwiAzDmicqwMV9VlsFa5xCfRbr1tnI80tBbFvyA4YN+6aHUwBzxEUpRE585fpIJbd7uTz5TK2VghroIT2NqAQ+OFsvzq1BEa6jiJGNdB3jeb0Sj75J//uDNjC0/QfsA=
+  file:
+    - book.epub
+    - book.mobi
+    - book.pdf
+  on:
+    repo: GITenberg/Der-kleine-Herr-FriedemannNovellen_36766
+    tags: true
+addons:
+  apt:
+    packages:
+    - xsltproc
+    - xvfb
+    - calibre
+    - python-pip
+    - git
+    - python-dev
+    - libjpeg-dev
+    - libpng-dev
+    - libfreetype6
+    - libfreetype6-dev
+    - zlib1g-dev
+    - python-lxml
+    - libxml2-dev
+    - libxslt1-dev
+    - tidy
